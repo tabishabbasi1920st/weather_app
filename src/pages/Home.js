@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <MainContainer>
       <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <WeatherDisplay />
+      <WeatherDisplay isDarkMode={isDarkMode} />
     </MainContainer>
   );
 };

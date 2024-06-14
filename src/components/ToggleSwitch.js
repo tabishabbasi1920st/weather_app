@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import styled from "styled-components";
+import { FaCloudMoon, FaRegSun } from "react-icons/fa";
 
 const ToggleSwitch = ({ isDarkMode, setIsDarkMode }) => {
   const handleToggle = () => {
@@ -8,7 +8,13 @@ const ToggleSwitch = ({ isDarkMode, setIsDarkMode }) => {
 
   return (
     <Switch isDarkMode={isDarkMode} onClick={handleToggle}>
-      <Slider isDarkMode={isDarkMode} />
+      <Slider isDarkMode={isDarkMode}>
+        {isDarkMode ? (
+          <FaCloudMoon fontSize={20} />
+        ) : (
+          <FaRegSun fontSize={20} />
+        )}
+      </Slider>
     </Switch>
   );
 };
@@ -35,4 +41,7 @@ const Slider = styled.div`
   transition: transform 0.2s;
   transform: ${(props) =>
     props.isDarkMode ? "translateX(30px)" : "translateX(0)"};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

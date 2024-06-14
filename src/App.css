@@ -6,3 +6,11 @@
   text-decoration: none;
   font-family: "Roboto";
 }
+
+.dark-bg {
+  background-color: #1f1f1f;
+}
+
+.light-bg {
+  background-color: #f7f7f7;
+}

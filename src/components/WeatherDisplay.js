@@ -20,7 +20,7 @@ const MainContainer = styled.div`
 `;
 
 const WeatherCard = styled.div`
-  border: 2px solid green;
+  /* border: 2px solid green; */
   flex-grow: 1;
   overflow: hidden;
 `;

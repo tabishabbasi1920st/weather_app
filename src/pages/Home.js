@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import Header from "../components/Header";
 import WeatherDisplay from "../components/WeatherDisplay";
+import { ThemeContext } from "../context/ThemeContext";
+import { useContext } from "react";
 
 const Home = () => {
+  const { isDarkMode, setIsDarkMode = { setIsDarkMode } } =
+    useContext(ThemeContext);
+
   return (
     <MainContainer>
-      <Header />
+      <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <WeatherDisplay />
     </MainContainer>
   );

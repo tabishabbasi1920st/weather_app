@@ -7,7 +7,11 @@ const apiStatusConstants = {
   failure: "FAILURE",
 };
 
-const CurrentLocationWeather = ({ location, setWeatherData, setApiStatus }) => {
+const FetchCurrentLocationWeather = ({
+  location,
+  setWeatherData,
+  setApiStatus,
+}) => {
   useEffect(() => {
     fetchCurrentLocationWeather();
   }, []);
@@ -30,4 +34,4 @@ const CurrentLocationWeather = ({ location, setWeatherData, setApiStatus }) => {
   return;
 };
 
-export default CurrentLocationWeather;
+export default FetchCurrentLocationWeather;

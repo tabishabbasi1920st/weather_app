@@ -17,7 +17,7 @@ const Header = ({ searchBtn, isDarkMode, setIsDarkMode }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer isDarkMode={isDarkMode}>
       <LogoTxt isDarkMode={isDarkMode}>Weather</LogoTxt>
       <Wrapper>
         {renderSearchButton()}
@@ -35,6 +35,7 @@ const MainContainer = styled.div`
   align-items: center;
   padding: 10px;
   justify-content: space-between;
+  box-shadow: ${({ isDarkMode }) => !isDarkMode && "1px 1px 5px 1px #bfbfbf"};
 
   @media screen and (min-width: 1024px) {
     padding: 10px 10%;

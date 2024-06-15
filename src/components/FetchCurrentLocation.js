@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const CurrentLocation = ({ setLocation, setLocationError }) => {
+const FetchCurrentLocation = ({ setLocation, setLocationError }) => {
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -46,4 +46,4 @@ const CurrentLocation = ({ setLocation, setLocationError }) => {
   return;
 };
 
-export default CurrentLocation;
+export default FetchCurrentLocation;

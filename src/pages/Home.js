@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Header from "../components/Header";
-import WeatherDisplay from "../components/WeatherDisplay";
 import { ThemeContext } from "../context/ThemeContext";
 import { useContext } from "react";
+import WeatherCard from "../components/WeatherCard";
 
 const Home = () => {
   const { isDarkMode, setIsDarkMode = { setIsDarkMode } } =
@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <MainContainer>
       <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <WeatherDisplay isDarkMode={isDarkMode} />
+      <WeatherCard isDarkMode={isDarkMode} />
     </MainContainer>
   );
 };

@@ -13,10 +13,8 @@ const ThemeContextProvider = ({ children }) => {
 
     mediaQuery.addEventListener("change", handleChange);
 
-    return () => mediaQuery.removeEventListener(handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
-
-  console.log(isDarkMode);
 
   return (
     <ThemeContext.Provider

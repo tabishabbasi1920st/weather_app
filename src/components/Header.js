@@ -1,11 +1,28 @@
 import styled from "styled-components";
+import SearchButton from "./SearchButton";
 import ToggleSwitch from "./ToggleSwitch";
 
-const Header = ({ isDarkMode, setIsDarkMode }) => {
+const Header = ({ searchBtn, isDarkMode, setIsDarkMode }) => {
+  const renderSearchButton = () => {
+    switch (searchBtn) {
+      case undefined:
+        return <SearchButton />;
+      case true:
+        return <SearchButton />;
+      case false:
+        return null;
+      default:
+        return;
+    }
+  };
+
   return (
     <MainContainer>
       <LogoTxt isDarkMode={isDarkMode}>Weather</LogoTxt>
-      <ToggleSwitch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <Wrapper>
+        {renderSearchButton()}
+        <ToggleSwitch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      </Wrapper>
     </MainContainer>
   );
 };
@@ -27,4 +44,10 @@ const MainContainer = styled.div`
 const LogoTxt = styled.h1`
   font-size: 40px;
   color: ${({ isDarkMode }) => (isDarkMode ? "#fff" : "#000")};
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;

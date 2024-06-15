@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-const CurrentLocationCoords = ({ setLocation, setError }) => {
-  const getLocation = () => {
+const CurrentLocation = ({ setLocation, setLocationError }) => {
+  const getCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -13,19 +13,19 @@ const CurrentLocationCoords = ({ setLocation, setError }) => {
         (err) => {
           switch (err.code) {
             case err.PERMISSION_DENIED:
-              setError("User denied the request for Geolocation");
+              setLocationError("User denied the request for Geolocation");
               break;
             case err.POSITION_UNAVAILABLE:
-              setError("Location information is unavailable");
+              setLocationError("Location information is unavailable");
               break;
             case err.TIMEOUT:
-              setError("The request to get user location timed out");
+              setLocationError("The request to get user location timed out");
               break;
             case err.UNKNOWN_ERROR:
-              setError("An unknown error occured");
+              setLocationError("An unknown error occured");
               break;
             default:
-              setError("An unknown error occured");
+              setLocationError("An unknown error occured");
           }
         },
         {
@@ -35,15 +35,15 @@ const CurrentLocationCoords = ({ setLocation, setError }) => {
         }
       );
     } else {
-      setError("Geolocation is not supported by this browser");
+      setLocationError("Geolocation is not supported by this browser");
     }
   };
 
   useEffect(() => {
-    getLocation();
+    getCurrentLocation();
   }, []);
 
-  return;
+  return <div>CurrentLocation</div>;
 };
 
-export default CurrentLocationCoords;
+export default CurrentLocation;

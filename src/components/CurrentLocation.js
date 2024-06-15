@@ -43,7 +43,7 @@ const CurrentLocation = ({ setLocation, setLocationError }) => {
     getCurrentLocation();
   }, []);
 
-  return <div>CurrentLocation</div>;
+  return;
 };
 
 export default CurrentLocation;

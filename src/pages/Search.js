@@ -36,4 +36,8 @@ const MainContainer = styled.div`
 const SearchSection = styled.div`
   padding: 10px;
   flex-grow: 1;
+
+  @media screen and (min-width: 1024px) {
+    padding: 10px 10%;
+  }
 `;

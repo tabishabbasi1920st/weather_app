@@ -1,87 +1,32 @@
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
-import { FaCircle } from "react-icons/fa";
-import { FaCloudSun } from "react-icons/fa";
-import { FaCloud } from "react-icons/fa";
-import { FaCloudMeatball } from "react-icons/fa";
-import { FaCloudSunRain } from "react-icons/fa";
-import { FaCloudShowersWater, FaW } from "react-icons/fa6";
-import { FaCloudBolt } from "react-icons/fa6";
-import { FaRegSnowflake } from "react-icons/fa";
-import { TbMist } from "react-icons/tb";
-import ArrowButton from "./ArrowButton";
-import { kelvinToCelsius, getFormattedTime } from "../utilities/utilities";
-import { v4 as uuidv4 } from "uuid";
-import DescriptionCard from "./DescriptionCard";
 
+// ICONS...
+
+import { FaCloud } from "react-icons/fa";
 import { FaWind } from "react-icons/fa";
 import { GiThrustBend } from "react-icons/gi";
 import { WiHumidity } from "react-icons/wi";
 import { FaTemperatureLow } from "react-icons/fa";
 import { FaTemperatureHigh } from "react-icons/fa6";
-import { GiPressureCooker } from "react-icons/gi";
 import { MdFaceRetouchingNatural } from "react-icons/md";
 import { FaWater } from "react-icons/fa";
 import { FaArrowUpFromGroundWater } from "react-icons/fa6";
 
-const apiStatusConstants = {
-  initial: "INITIAL",
-  inProgress: "PROGRESS",
-  success: "SUCCESS",
-  failure: "FAILURE",
-};
+import ArrowButton from "./ArrowButton";
+import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import DescriptionCard from "./DescriptionCard";
+import {
+  kelvinToCelsius,
+  getFormattedTime,
+  getAppropriateIcon,
+} from "../utilities/utilities";
 
-const FetchCurrentLocationWeather = ({ isDarkMode, location }) => {
-  const [apiStatus, setApiStatus] = useState(apiStatusConstants.success);
-  const [weatherData, setWeatherData] = useState({
-    coord: {
-      lon: 78.0081,
-      lat: 27.1767,
-    },
-    weather: [
-      {
-        id: 802,
-        main: "Clouds",
-        description: "scattered clouds",
-        icon: "03d",
-      },
-    ],
-    base: "stations",
-    main: {
-      temp: 316.32,
-      feels_like: 314.74,
-      temp_min: 316.32,
-      temp_max: 316.32,
-      pressure: 995,
-      humidity: 14,
-      sea_level: 995,
-      grnd_level: 977,
-    },
-    visibility: 10000,
-    wind: {
-      speed: 5.21,
-      deg: 271,
-      gust: 7.03,
-    },
-    clouds: {
-      all: 44,
-    },
-    dt: 1718455447,
-    sys: {
-      country: "IN",
-      sunrise: 1718409192,
-      sunset: 1718459031,
-    },
-    timezone: 19800,
-    id: 1276559,
-    name: "Belanganj",
-    cod: 200,
-  });
-
+const FetchCurrentLocationWeather = ({ isDarkMode, weatherData }) => {
   const cardsContainerRef = useRef();
 
   const { name, dt, main, weather, wind, clouds } = weatherData;
-  const { deg, gust, speed } = wind;
+  const { deg, speed } = wind;
   const {
     feels_like,
     grnd_level,
@@ -92,43 +37,86 @@ const FetchCurrentLocationWeather = ({ isDarkMode, location }) => {
     temp_min,
   } = main;
 
-  useEffect(() => {
-    // fetchCurrentLocationWeather();
-  }, []);
-
-  const fetchCurrentLocationWeather = async () => {
-    setApiStatus(apiStatusConstants.inProgress);
-    const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
-    const { lat, lng } = location;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}`;
-
-    const response = await fetch(apiUrl);
-    if (response.ok) {
-      const data = await response.json();
-      setWeatherData(data);
-      setApiStatus(apiStatusConstants.success);
-    } else {
-      setApiStatus(apiStatusConstants.failure);
-    }
-  };
-
-  console.log(weatherData);
-
-  const renderProgressView = () => {
-    return (
-      <ProgressViewContainer isDarkMode={isDarkMode}>
-        progress view
-      </ProgressViewContainer>
-    );
-  };
-
-  const renderFailureView = () => {
-    return (
-      <FailureViewContainer isDarkMode={isDarkMode}>
-        failure view
-      </FailureViewContainer>
-    );
-  };
+  const cardsData = [
+    {
+      id: uuidv4(),
+      name: "Wind Speed",
+      value: `${speed}km/h`,
+      icon: <FaWind fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />,
+    },
+    {
+      id: uuidv4(),
+      name: "Wind Degree",
+      value: `${deg}°`,
+      icon: (
+        <GiThrustBend fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />
+      ),
+    },
+    {
+      id: uuidv4(),
+      name: "Humidity",
+      value: `${humidity}%`,
+      icon: (
+        <WiHumidity fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />
+      ),
+    },
+    {
+      id: uuidv4(),
+      name: "Min Temp",
+      value: `${kelvinToCelsius(temp_min)}°`,
+      icon: (
+        <FaTemperatureLow
+          fontSize={35}
+          color={isDarkMode ? "#fff" : "#1f1f1f"}
+        />
+      ),
+    },
+    {
+      id: uuidv4(),
+      name: "Max Temp",
+      value: `${kelvinToCelsius(temp_max)}°`,
+      icon: (
+        <FaTemperatureHigh
+          fontSize={35}
+          color={isDarkMode ? "#fff" : "#1f1f1f"}
+        />
+      ),
+    },
+    {
+      id: uuidv4(),
+      name: "Feels Like",
+      value: `${kelvinToCelsius(feels_like)}°`,
+      icon: (
+        <MdFaceRetouchingNatural
+          fontSize={35}
+          color={isDarkMode ? "#fff" : "#1f1f1f"}
+        />
+      ),
+    },
+    {
+      id: uuidv4(),
+      name: "Atm On Sea",
+      value: `${pressure}hpa`,
+      icon: <FaWater fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />,
+    },
+    {
+      id: uuidv4(),
+      name: "Clouds",
+      value: `${clouds.all}%`,
+      icon: <FaCloud fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />,
+    },
+    {
+      id: uuidv4(),
+      name: "Atm on Ground",
+      value: `${grnd_level}%`,
+      icon: (
+        <FaArrowUpFromGroundWater
+          fontSize={35}
+          color={isDarkMode ? "#fff" : "#1f1f1f"}
+        />
+      ),
+    },
+  ];
 
   const scrollLeft = () => {
     if (cardsContainerRef.current) {
@@ -148,104 +136,7 @@ const FetchCurrentLocationWeather = ({ isDarkMode, location }) => {
     }
   };
 
-  const renderAppropriateIcon = (desiredIcon) => {
-    const icons = {
-      "01d": <FaCircle />,
-      "02d": <FaCloudSun />,
-      "03d": <FaCloud />,
-      "04d": <FaCloudMeatball />,
-      "09d": <FaCloudSunRain />,
-      "10d": <FaCloudShowersWater />,
-      "11d": <FaCloudBolt />,
-      "13d": <FaRegSnowflake />,
-      "14d": <TbMist />,
-    };
-
-    return <WeatherIcon>{icons[desiredIcon]}</WeatherIcon>;
-  };
-
   const renderWeatherDescription = () => {
-    const refineData = [
-      {
-        id: uuidv4(),
-        name: "Wind Speed",
-        value: `${speed}km/h`,
-        icon: <FaWind fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />,
-      },
-      {
-        id: uuidv4(),
-        name: "Wind Degree",
-        value: `${deg}°`,
-        icon: (
-          <GiThrustBend fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />
-        ),
-      },
-      {
-        id: uuidv4(),
-        name: "Humidity",
-        value: `${humidity}%`,
-        icon: (
-          <WiHumidity fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />
-        ),
-      },
-      {
-        id: uuidv4(),
-        name: "Min Temp",
-        value: `${kelvinToCelsius(temp_min)}°`,
-        icon: (
-          <FaTemperatureLow
-            fontSize={35}
-            color={isDarkMode ? "#fff" : "#1f1f1f"}
-          />
-        ),
-      },
-      {
-        id: uuidv4(),
-        name: "Max Temp",
-        value: `${kelvinToCelsius(temp_max)}°`,
-        icon: (
-          <FaTemperatureHigh
-            fontSize={35}
-            color={isDarkMode ? "#fff" : "#1f1f1f"}
-          />
-        ),
-      },
-      {
-        id: uuidv4(),
-        name: "Feels Like",
-        value: `${kelvinToCelsius(feels_like)}°`,
-        icon: (
-          <MdFaceRetouchingNatural
-            fontSize={35}
-            color={isDarkMode ? "#fff" : "#1f1f1f"}
-          />
-        ),
-      },
-      {
-        id: uuidv4(),
-        name: "Atm On Sea",
-        value: `${pressure}hpa`,
-        icon: <FaWater fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />,
-      },
-      {
-        id: uuidv4(),
-        name: "Clouds",
-        value: `${clouds.all}%`,
-        icon: <FaCloud fontSize={35} color={isDarkMode ? "#fff" : "#1f1f1f"} />,
-      },
-      {
-        id: uuidv4(),
-        name: "Atm on Ground",
-        value: `${grnd_level}%`,
-        icon: (
-          <FaArrowUpFromGroundWater
-            fontSize={35}
-            color={isDarkMode ? "#fff" : "#1f1f1f"}
-          />
-        ),
-      },
-    ];
-
     return (
       <WeatherDescContainer>
         <ArrowButton
@@ -254,7 +145,7 @@ const FetchCurrentLocationWeather = ({ isDarkMode, location }) => {
           executableFunction={scrollLeft}
         />
         <Cards ref={cardsContainerRef}>
-          {refineData.map((card) => (
+          {cardsData.map((card) => (
             <DescriptionCard
               card={card}
               key={card.id}
@@ -271,13 +162,13 @@ const FetchCurrentLocationWeather = ({ isDarkMode, location }) => {
     );
   };
 
-  const renderSuccessView = () => {
-    return (
+  return (
+    <MainContainer>
       <SuccessViewContainer>
         <LocationNameTxt isDarkMode={isDarkMode}>{name}</LocationNameTxt>
         <Wrapper>
           <SuccessFirstContainer>
-            {renderAppropriateIcon(weather[0].icon)}
+            <WeatherIcon>{getAppropriateIcon(weather[0].icon)}</WeatherIcon>
             <MainTempTxt isDarkMode={isDarkMode}>
               {kelvinToCelsius(temp)}
             </MainTempTxt>
@@ -296,23 +187,8 @@ const FetchCurrentLocationWeather = ({ isDarkMode, location }) => {
         </WeatherDescHeading>
         {renderWeatherDescription()}
       </SuccessViewContainer>
-    );
-  };
-
-  const renderAppropriateView = () => {
-    switch (apiStatus) {
-      case apiStatusConstants.success:
-        return renderSuccessView();
-      case apiStatusConstants.failure:
-        return renderFailureView();
-      case apiStatusConstants.inProgress:
-        return renderProgressView();
-      default:
-        return null;
-    }
-  };
-
-  return <MainContainer>{renderAppropriateView()}</MainContainer>;
+    </MainContainer>
+  );
 };
 
 export default FetchCurrentLocationWeather;
@@ -393,11 +269,6 @@ const TimeTxt = styled.p`
   font-size: 20px;
 `;
 
-const WindSpeed = styled.p`
-  color: ${({ isDarkMode }) => (isDarkMode ? "#fff" : "#000")};
-  font-size: 14px;
-`;
-
 const WeatherMain = styled.p`
   color: ${({ isDarkMode }) => (isDarkMode ? "#fff" : "#000")};
 `;
@@ -457,16 +328,6 @@ const UnitTxt = styled.p`
   @media screen and (min-width: 1025px) {
     margin-top: 60px;
   }
-`;
-
-const ProgressViewContainer = styled.div`
-  /* border: 2px solid blue; */
-  flex-grow: 1;
-`;
-
-const FailureViewContainer = styled.div`
-  /* border: 2px solid blue; */
-  flex-grow: 1;
 `;
 
 const WeatherDescHeading = styled.h2`

@@ -8,8 +8,8 @@ import { useContext } from "react";
 const Search = () => {
   const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
   const [searchValue, setSearchValue] = useState("");
-
-  const fetchTemperatureDetails = () => {};
+  const [countryCode, setCountryCode] = useState("in");
+  const [initiateSearch, setInitiateSearch] = useState(false);
 
   return (
     <MainContainer>
@@ -23,7 +23,7 @@ const Search = () => {
           isDarkMode={isDarkMode}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-          executableFunction={fetchTemperatureDetails}
+          executableFunction={setInitiateSearch}
         />
       </SearchSection>
     </MainContainer>

@@ -1,21 +1,19 @@
 import styled from "styled-components";
 import Searchbar from "./Searchbar";
 import CurrentLocationCoords from "./CurrentLocationCoords";
-import PreciseLocationButton from "./PreciseLocationButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const WeatherDisplay = ({ isDarkMode }) => {
-  const [usePreciseLocation, setUsePreciseLocation] = useState(false);
   const [location, setLocation] = useState({ lat: null, lng: null });
   const [error, setError] = useState(null);
+
+  console.log("Location", location);
+  console.log("Error", error);
 
   return (
     <MainContainer>
       <Searchbar isDarkMode={isDarkMode} />
-      {usePreciseLocation && (
-        <CurrentLocationCoords setLocation={setLocation} setError={setError} />
-      )}
-      <PreciseLocationButton setUsePreciseLocation={setUsePreciseLocation} />
+      <CurrentLocationCoords setLocation={setLocation} setError={setError} />
       <WeatherCard></WeatherCard>
     </MainContainer>
   );

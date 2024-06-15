@@ -15,50 +15,7 @@ const WeatherCard = ({ isDarkMode }) => {
   const [location, setLocation] = useState({ lat: null, lng: null });
   const [locationError, setLocationError] = useState(null);
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
-  const [weatherData, setWeatherData] = useState({
-    coord: {
-      lon: 78.0081,
-      lat: 27.1767,
-    },
-    weather: [
-      {
-        id: 802,
-        main: "Clouds",
-        description: "scattered clouds",
-        icon: "03d",
-      },
-    ],
-    base: "stations",
-    main: {
-      temp: 316.32,
-      feels_like: 314.74,
-      temp_min: 316.32,
-      temp_max: 316.32,
-      pressure: 995,
-      humidity: 14,
-      sea_level: 995,
-      grnd_level: 977,
-    },
-    visibility: 10000,
-    wind: {
-      speed: 5.21,
-      deg: 271,
-      gust: 7.03,
-    },
-    clouds: {
-      all: 44,
-    },
-    dt: 1718455447,
-    sys: {
-      country: "IN",
-      sunrise: 1718409192,
-      sunset: 1718459031,
-    },
-    timezone: 19800,
-    id: 1276559,
-    name: "Belanganj",
-    cod: 200,
-  });
+  const [weatherData, setWeatherData] = useState();
 
   const fetchCurrentLocationWeather = async () => {
     setApiStatus(apiStatusConstants.inProgress);
@@ -75,6 +32,8 @@ const WeatherCard = ({ isDarkMode }) => {
       setApiStatus(apiStatusConstants.failure);
     }
   };
+
+  console.log(weatherData);
 
   useEffect(() => {
     if (location.lat !== null && locationError === null) {

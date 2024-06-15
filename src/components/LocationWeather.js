@@ -177,7 +177,7 @@ const LocationWeather = ({ isDarkMode, weatherData }) => {
           <SuccessSecondContainer>
             <WeatherTxt isDarkMode={isDarkMode}>Weather</WeatherTxt>
             <TimeTxt isDarkMode={isDarkMode}>
-              {getFormattedTime(new Date(dt).toLocaleString())}
+              {getFormattedTime(new Date(dt * 1000).toLocaleString())}
             </TimeTxt>
             <WeatherMain isDarkMode={isDarkMode}>{weather[0].main}</WeatherMain>
           </SuccessSecondContainer>

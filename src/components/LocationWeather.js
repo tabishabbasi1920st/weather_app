@@ -22,7 +22,7 @@ import {
   getAppropriateIcon,
 } from "../utilities/utilities";
 
-const FetchCurrentLocationWeather = ({ isDarkMode, weatherData }) => {
+const LocationWeather = ({ isDarkMode, weatherData }) => {
   const cardsContainerRef = useRef();
 
   const { name, dt, main, weather, wind, clouds } = weatherData;
@@ -191,7 +191,7 @@ const FetchCurrentLocationWeather = ({ isDarkMode, weatherData }) => {
   );
 };
 
-export default FetchCurrentLocationWeather;
+export default LocationWeather;
 
 const MainContainer = styled.div`
   /* border: 2px solid red; */
@@ -201,8 +201,8 @@ const MainContainer = styled.div`
 `;
 
 const SuccessViewContainer = styled.div`
-  /* border: 2px solid green; */
   padding: 20px;
+  border-radius: 10px;
   flex-grow: 1;
   box-shadow: 1px 1px 8px 1px #bfbfbf;
 
@@ -233,6 +233,7 @@ const WeatherDescContainer = styled.div`
   flex-grow: 1;
   gap: 10px;
   overflow: hidden;
+  margin-top: auto;
 `;
 
 const Cards = styled.ul`

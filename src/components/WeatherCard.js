@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import FetchCurrentLocation from "./FetchCurrentLocation";
-import CurrentLocationWeather from "./CurrentLocationWeather";
+import LocationWeather from "./LocationWeather";
 import Loader from "./Loader";
 
 const apiStatusConstants = {
@@ -135,7 +135,7 @@ const WeatherCard = ({ isDarkMode }) => {
       switch (apiStatus) {
         case apiStatusConstants.success:
           return (
-            <CurrentLocationWeather
+            <LocationWeather
               isDarkMode={isDarkMode}
               location={location}
               weatherData={weatherData}
@@ -167,8 +167,9 @@ export default WeatherCard;
 const MainContainer = styled.div`
   flex-grow: 1;
   /* overflow: hidden; */
-  display: flex;
-  flex-direction: column;
+  /* border: 2px solid red; */
+  padding: 10px;
+  margin-top: 20px;
 
   @media screen and (min-width: 1024px) {
     padding: 10px 10%;

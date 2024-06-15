@@ -22,6 +22,7 @@ const MainContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
+  box-shadow: 1px 1px 5px 1px #bfbfbf;
   flex-grow: 1;
   padding: 10px;
   border: none;

@@ -43,11 +43,15 @@ const MainContainer = styled.div`
 
 const LogoTxt = styled.h1`
   font-size: 40px;
-  color: ${({ isDarkMode }) => (isDarkMode ? "#fff" : "#000")};
+  color: ${({ isDarkMode }) => (isDarkMode ? "#fff" : "#1f1f1f")};
 `;
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  @media screen and (max-width: 576px) {
+    gap: 15px;
+  }
 `;

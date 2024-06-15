@@ -26,6 +26,7 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  box-shadow: 1px 1px 5px 1px #bfbfbf;
 
   .search-btn-txt {
     color: #757579;
@@ -33,9 +34,21 @@ const MainContainer = styled.div`
       display: none;
     }
   }
+
+  @media screen and (max-width: 576px) {
+    padding: 5px 10px;
+  }
 `;
 
 const Button = styled.button`
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
+  font-size: 20px;
+
+  @media screen and (max-width: 576px) {
+    font-size: 25px;
+  }
 `;

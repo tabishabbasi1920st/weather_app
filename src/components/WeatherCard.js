@@ -1,35 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
 import FetchCurrentLocation from "./FetchCurrentLocation";
-import FetchCurrentLocationWeather from "./FetchCurrentLocationWeather";
-import CurrentLocationTemp from "./CurrentLocationTemp";
-
-const apiStatusConstants = {
-  initial: "INITIAL",
-  inProgress: "PROGRESS",
-  success: "SUCCESS",
-  failure: "FAILURE",
-};
+import CurrentLocationWeather from "./CurrentLocationWeather";
 
 const WeatherCard = ({ isDarkMode }) => {
   const [location, setLocation] = useState({ lat: null, lng: null });
   const [locationError, setLocationError] = useState(null);
-  const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
-  const [weatherData, setWeatherData] = useState({});
-
-  console.log(location, locationError, apiStatus, weatherData);
-
-  const fetchCurrentLocationWeather = () => {
-    if (location.lat !== null && locationError === null) {
-      return (
-        <FetchCurrentLocationWeather
-          location={location}
-          setWeatherData={setWeatherData}
-          setApiStatus={setApiStatus}
-        />
-      );
-    }
-  };
 
   const renderPermissionFailureView = () => {
     const permissionGuidanceViewImg =
@@ -61,8 +37,11 @@ const WeatherCard = ({ isDarkMode }) => {
     if (locationError !== null) {
       return renderPermissionFailureView();
     }
-
-    return <CurrentLocationTemp />;
+    if (location.lat !== null && locationError === null) {
+      return (
+        <CurrentLocationWeather isDarkMode={isDarkMode} location={location} />
+      );
+    }
   };
 
   return (
@@ -71,7 +50,6 @@ const WeatherCard = ({ isDarkMode }) => {
         setLocation={setLocation}
         setLocationError={setLocationError}
       />
-      {fetchCurrentLocationWeather()}
       {renderAppropriateView()}
     </MainContainer>
   );
@@ -81,7 +59,9 @@ export default WeatherCard;
 
 const MainContainer = styled.div`
   flex-grow: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
+  display: flex;
+  flex-direction: column;
 
   @media screen and (min-width: 1024px) {
     padding: 10px 10%;

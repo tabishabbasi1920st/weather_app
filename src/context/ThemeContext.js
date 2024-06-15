@@ -6,6 +6,7 @@ const ThemeContextProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(
     window.matchMedia("(prefers-color-scheme:dark)").matches
   );
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme:dark)");
@@ -21,6 +22,8 @@ const ThemeContextProvider = ({ children }) => {
       value={{
         isDarkMode,
         setIsDarkMode,
+        data,
+        setData,
       }}
     >
       {children}

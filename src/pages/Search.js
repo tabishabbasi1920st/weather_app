@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Searchbar from "../components/Searchbar";
@@ -7,6 +7,9 @@ import { useContext } from "react";
 
 const Search = () => {
   const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
+  const [searchValue, setSearchValue] = useState("");
+
+  const fetchTemperatureDetails = () => {};
 
   return (
     <MainContainer>
@@ -16,7 +19,12 @@ const Search = () => {
         searchBtn={false}
       />
       <SearchSection>
-        <Searchbar />
+        <Searchbar
+          isDarkMode={isDarkMode}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          executableFunction={fetchTemperatureDetails}
+        />
       </SearchSection>
     </MainContainer>
   );

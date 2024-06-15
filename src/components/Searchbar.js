@@ -1,13 +1,21 @@
 import styled from "styled-components";
 
-const Searchbar = ({ isDarkMode, fetchTempDetails }) => (
+const Searchbar = ({
+  isDarkMode,
+  executableFunction,
+  searchValue,
+  setSearchValue,
+}) => (
   <MainContainer>
     <SearchInput
+      isDarkMode={isDarkMode}
       type="text"
       placeholder="Enter city name or zip code.."
       autoFocus
+      value={searchValue}
+      onChange={(e) => setSearchValue(e.target.value)}
     />
-    <SearchButton onChange={() => fetchTempDetails()}>Search</SearchButton>
+    <SearchButton onClick={executableFunction}>Search</SearchButton>
   </MainContainer>
 );
 
@@ -24,11 +32,13 @@ const MainContainer = styled.div`
 const SearchInput = styled.input`
   box-shadow: 1px 1px 5px 1px #bfbfbf;
   flex-grow: 1;
-  padding: 10px;
+  padding: 15px;
   border: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 17px;
   outline: none;
+  background-color: ${({ isDarkMode }) =>
+    isDarkMode ? "#fff" : "transparent"};
 `;
 
 const SearchButton = styled.button`

@@ -3,7 +3,7 @@ import { FaLocationCrosshairs } from "react-icons/fa6";
 
 const PreciseLocationButton = ({ setUsePreciseLocation }) => {
   return (
-    <Button>
+    <Button onClick={() => setUsePreciseLocation()}>
       <FaLocationCrosshairs />
       <span>Use precise location</span>
     </Button>

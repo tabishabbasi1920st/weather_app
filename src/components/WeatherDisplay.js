@@ -1,10 +1,21 @@
 import styled from "styled-components";
 import Searchbar from "./Searchbar";
+import CurrentLocationCoords from "./CurrentLocationCoords";
+import PreciseLocationButton from "./PreciseLocationButton";
+import { useState } from "react";
 
 const WeatherDisplay = ({ isDarkMode }) => {
+  const [usePreciseLocation, setUsePreciseLocation] = useState(false);
+  const [location, setLocation] = useState({ lat: null, lng: null });
+  const [error, setError] = useState(null);
+
   return (
     <MainContainer>
       <Searchbar isDarkMode={isDarkMode} />
+      {usePreciseLocation && (
+        <CurrentLocationCoords setLocation={setLocation} setError={setError} />
+      )}
+      <PreciseLocationButton setUsePreciseLocation={setUsePreciseLocation} />
       <WeatherCard></WeatherCard>
     </MainContainer>
   );
@@ -13,7 +24,6 @@ const WeatherDisplay = ({ isDarkMode }) => {
 export default WeatherDisplay;
 
 const MainContainer = styled.div`
-  /* border: 2px solid green; */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -25,7 +35,6 @@ const MainContainer = styled.div`
 `;
 
 const WeatherCard = styled.div`
-  /* border: 2px solid blue; */
   flex-grow: 1;
   overflow: hidden;
 `;

@@ -2,12 +2,8 @@ import styled from "styled-components";
 
 const Searchbar = ({ isDarkMode, fetchTempDetails }) => (
   <MainContainer>
-    <SearchInput
-      type="text"
-      placeholder="Enter city name or zip code.."
-      onChange={() => fetchTempDetails()}
-    />
-    <SearchButton>Search</SearchButton>
+    <SearchInput type="text" placeholder="Enter city name or zip code.." />
+    <SearchButton onChange={() => fetchTempDetails()}>Search</SearchButton>
   </MainContainer>
 );
 

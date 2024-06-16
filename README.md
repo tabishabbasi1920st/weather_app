@@ -3,6 +3,22 @@
 Welcome to the Weather Application! This project is developed as part of Kraftshala’s selection process for the Frontend Developer intern position. The application provides current weather information based on the user's input and current location's weather of the user who is visiting on website includes a dark mode toggle feature.
 
 > Demo: https://tabishweather.netlify.app
+>
+> ## Getting Started
+
+### Prerequisites
+
+- Node.js installed on your machine
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/weather-app.git
+   cd weather-app
+   ```
+
 
 ## Features
 
@@ -121,17 +137,3 @@ Home
 - The repo is well-organized and easy to navigate
 - The Application handled all the errors
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js installed on your machine
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/weather-app.git
-   cd weather-app
-   ```

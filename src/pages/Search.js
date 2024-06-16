@@ -33,9 +33,9 @@ const Search = () => {
   const fetchCurrentLocationWeather = async () => {
     setApiStatus(apiStatusConstants.inProgress);
     const apiUrl = getApiUrl();
-    console.log(apiUrl);
+
     const response = await fetch(apiUrl);
-    console.log(response);
+
     if (response.ok) {
       const data = await response.json();
       setWeatherData(data);
@@ -44,8 +44,6 @@ const Search = () => {
       setApiStatus(apiStatusConstants.failure);
     }
   };
-
-  console.log(weatherData);
 
   const renderFailureView = () => {
     return (

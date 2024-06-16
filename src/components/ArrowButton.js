@@ -4,7 +4,6 @@ import {
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
 
-
 const ArrowButton = ({ isDarkMode, arrowType, executableFunction }) => {
   const getAppropriateIcon = () => {
     switch (arrowType) {

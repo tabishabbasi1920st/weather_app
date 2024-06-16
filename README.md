@@ -6,12 +6,12 @@ Welcome to the Weather Application! This project is developed as part of Kraftsh
 
 ## Features
 
-- Multiple city or country or zip code weather in single search eg: India Mumbai 247778
-- Display current weather information for the current location of the user with low accuracy in those device which doesn't have gps, like system but in mobile phone it will work on high accuracy.
-- Search functionality to fetch weather data for other cities by zip code or city name.
-- Display additional weather details such as humidity, wind speed, wind degree, min temp, max temp, Feels like temperature, atmospheric pressure on sea level, cloud percentage, and atmospheric pressure on ground.
-- Dark mode and light mode toggle
-- Responsive design for various devices
+- **Multiple city or country or zip code weather in single search** eg: Gurgaon Noida Faridabad 247773 Meerut Rohtak 247778 Panipat Aligarh Mathura Agra Sonipat (Note: while we use multiple weather feature we should enter all values correctly wether zip code or city name even a single zip code or city name misspelled it will not show even a single result.)
+- **Display current weather information for the current location of the user** with low accuracy in those device which doesn't have gps, like system but in mobile phone it will work on high accuracy.
+- **Search functionality to fetch weather data for other cities by zip code or city name and multiple search also.**
+- **Display additional weather details** such as **humidity**, **wind speed**, **wind degree**, **min temp**, **max temp**, **Feels like temperature**, **atmospheric pressure on sea level**, **cloud percentage**, and **atmospheric pressure on ground**.
+- **Dark mode and light mode toggle**
+- **Responsive design** for various devices
 
 ## Routes / Pages
 

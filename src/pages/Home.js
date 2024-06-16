@@ -5,8 +5,7 @@ import { useContext } from "react";
 import WeatherCard from "../components/WeatherCard";
 
 const Home = () => {
-  const { isDarkMode, setIsDarkMode = { setIsDarkMode } } =
-    useContext(ThemeContext);
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
 
   return (
     <MainContainer>

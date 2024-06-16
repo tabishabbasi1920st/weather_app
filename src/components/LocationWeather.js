@@ -13,7 +13,7 @@ import { FaWater } from "react-icons/fa";
 import { FaArrowUpFromGroundWater } from "react-icons/fa6";
 
 import ArrowButton from "./ArrowButton";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import DescriptionCard from "./DescriptionCard";
 import {

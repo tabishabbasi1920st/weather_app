@@ -198,6 +198,7 @@ const MainContainer = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 `;
 
 const SuccessViewContainer = styled.div`

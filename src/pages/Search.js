@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Searchbar from "../components/Searchbar";
 import { ThemeContext } from "../context/ThemeContext";
-import { useContext } from "react";
 import LocationWeather from "../components/LocationWeather";
 import Loader from "../components/Loader";
 
@@ -19,28 +18,44 @@ const Search = () => {
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
   const [searchValue, setSearchValue] = useState("");
   const [countryCode, setCountryCode] = useState("in");
-  const [weatherData, setWeatherData] = useState();
+  const [weatherData, setWeatherData] = useState([]);
 
-  const getApiUrl = () => {
+  const getApiUrls = () => {
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
-    if (isNaN(searchValue)) {
-      return `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&appid=${apiKey}`;
-    } else {
-      return `https://api.openweathermap.org/data/2.5/weather?zip=${searchValue},${countryCode}&appid=${apiKey}`;
-    }
+    const searchValues = searchValue.split(" ");
+    return searchValues.map((value) => {
+      if (isNaN(value)) {
+        return `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${apiKey}`;
+      } else {
+        return `https://api.openweathermap.org/data/2.5/weather?zip=${value},${countryCode}&appid=${apiKey}`;
+      }
+    });
   };
 
   const fetchCurrentLocationWeather = async () => {
     setApiStatus(apiStatusConstants.inProgress);
-    const apiUrl = getApiUrl();
+    const apiUrls = getApiUrls();
 
-    const response = await fetch(apiUrl);
+    try {
+      const responses = await Promise.all(
+        apiUrls.map(async (url) => {
+          const response = await fetch(url);
+          const data = await response.json();
+          return { ok: response.ok, data };
+        })
+      );
 
-    if (response.ok) {
-      const data = await response.json();
-      setWeatherData(data);
-      setApiStatus(apiStatusConstants.success);
-    } else {
+      const successfulResponses = responses
+        .filter((response) => response.ok)
+        .map((response) => response.data);
+
+      if (successfulResponses.length === responses.length) {
+        setWeatherData(successfulResponses);
+        setApiStatus(apiStatusConstants.success);
+      } else {
+        setApiStatus(apiStatusConstants.failure);
+      }
+    } catch (error) {
       setApiStatus(apiStatusConstants.failure);
     }
   };
@@ -66,9 +81,13 @@ const Search = () => {
   const renderAppropriateView = () => {
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return (
-          <LocationWeather isDarkMode={isDarkMode} weatherData={weatherData} />
-        );
+        return weatherData.map((data, index) => (
+          <LocationWeather
+            key={index}
+            isDarkMode={isDarkMode}
+            weatherData={data}
+          />
+        ));
       case apiStatusConstants.failure:
         return renderFailureView();
       case apiStatusConstants.inProgress:
@@ -102,7 +121,6 @@ const Search = () => {
 export default Search;
 
 const MainContainer = styled.div`
-  /* border: 2px solid red; */
   max-height: 100vh;
   min-height: 100vh;
   overflow-x: hidden;
@@ -134,7 +152,6 @@ const ProgressViewContainer = styled.div`
 `;
 
 const FailureViewContainer = styled.div`
-  /* border: 2px solid blue; */
   flex-grow: 1;
   display: flex;
   flex-direction: column;

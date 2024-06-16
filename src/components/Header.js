@@ -49,7 +49,7 @@ const MainContainer = styled.div`
 
 const LogoTxt = styled.h1`
   font-size: 40px;
-  color: ${({ isDarkMode }) => (isDarkMode ? "red" : "#1f1f1f")};
+  color: ${({ isDarkMode }) => (isDarkMode ? "#fff" : "#1f1f1f")};
   cursor: pointer;
 `;
 

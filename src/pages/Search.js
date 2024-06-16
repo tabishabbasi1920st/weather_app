@@ -24,7 +24,8 @@ const Search = () => {
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
     const trimmedSearchValue = searchValue.trim();
     const searchValues = trimmedSearchValue.split(" ");
-    return searchValues.map((value) => {
+    const uniqueSearchValues = [...new Set(searchValues)];
+    return uniqueSearchValues.map((value) => {
       if (isNaN(value)) {
         return `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${apiKey}`;
       } else {

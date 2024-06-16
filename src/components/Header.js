@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import SearchButton from "./SearchButton";
 import ToggleSwitch from "./ToggleSwitch";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ searchBtn, isDarkMode, setIsDarkMode }) => {
+  const navigate = useNavigate();
+
   const renderSearchButton = () => {
     switch (searchBtn) {
       case undefined:
@@ -18,7 +21,9 @@ const Header = ({ searchBtn, isDarkMode, setIsDarkMode }) => {
 
   return (
     <MainContainer isDarkMode={isDarkMode}>
-      <LogoTxt isDarkMode={isDarkMode}>Weather</LogoTxt>
+      <LogoTxt isDarkMode={isDarkMode} onClick={() => navigate("/")}>
+        Weather
+      </LogoTxt>
       <Wrapper>
         {renderSearchButton()}
         <ToggleSwitch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
@@ -45,6 +50,7 @@ const MainContainer = styled.div`
 const LogoTxt = styled.h1`
   font-size: 40px;
   color: ${({ isDarkMode }) => (isDarkMode ? "#fff" : "#1f1f1f")};
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`

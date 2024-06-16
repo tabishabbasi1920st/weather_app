@@ -93,6 +93,7 @@ const Search = () => {
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           executableFunction={fetchCurrentLocationWeather}
+          disabled={searchValue === ""}
         />
         <SearchResultContainer>{renderAppropriateView()}</SearchResultContainer>
       </SearchSection>

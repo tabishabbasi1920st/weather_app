@@ -5,16 +5,22 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {
-  const { isDarkMode } = useContext(ThemeContext);
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
 
   const navigate = useNavigate();
 
   return (
     <MainContainer>
-      <Header isDarkMode={isDarkMode} searchBtn={false} />
+      <Header
+        setIsDarkMode={setIsDarkMode}
+        isDarkMode={isDarkMode}
+        searchBtn={false}
+      />
       <Body>
         <ErrTxt isDarkMode={isDarkMode}>404 route not found</ErrTxt>
-        <Button onClick={() => navigate("/")}>Go Back To Home</Button>
+        <Button isDarkMode={isDarkMode} onClick={() => navigate("/")}>
+          Go Back To Home
+        </Button>
       </Body>
     </MainContainer>
   );
@@ -50,13 +56,14 @@ const ErrTxt = styled.p`
 `;
 
 const Button = styled.button`
+  background-color: ${({ isDarkMode }) => (isDarkMode ? "#ffe168" : "#fff")};
   height: 40px;
   padding: 10px 20px;
   border-radius: 30px;
   border: none;
   font-size: 16px;
   cursor: pointer;
-  &:hover {
-    box-shadow: 1px 1px 5px 1px #bfbfbf;
-  }
+  font-weight: 500;
+  box-shadow: ${({ isDarkMode }) =>
+    isDarkMode ? "" : "1px 1px 5px 1px #bfbfbf;"};
 `;

@@ -5,6 +5,7 @@ const Searchbar = ({
   executableFunction,
   searchValue,
   setSearchValue,
+  disabled,
 }) => (
   <MainContainer>
     <SearchInput
@@ -15,7 +16,9 @@ const Searchbar = ({
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
     />
-    <SearchButton onClick={executableFunction}>Search</SearchButton>
+    <SearchButton disabled={disabled} onClick={executableFunction}>
+      Search
+    </SearchButton>
   </MainContainer>
 );
 
@@ -50,4 +53,7 @@ const SearchButton = styled.button`
   color: #000;
   font-weight: 500;
   cursor: pointer;
+  &:disabled {
+    background-color: #fff4d4;
+  }
 `;

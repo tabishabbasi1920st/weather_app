@@ -2,7 +2,7 @@
 
 Welcome to the Weather Application! This project is developed as part of Kraftshala’s selection process for the Frontend Developer intern position. The application provides current weather information based on the user's input and current location's weather of the user who is visiting on website includes a dark mode toggle feature.
 
-> Demo: https://tabishweather.netlify.app
+> Demo: https://tabishweather.vercel.app/
 >
 > ## Getting Started
 

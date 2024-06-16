@@ -33,8 +33,6 @@ const WeatherCard = ({ isDarkMode }) => {
     }
   };
 
-  console.log(weatherData);
-
   useEffect(() => {
     if (location.lat !== null && locationError === null) {
       fetchCurrentLocationWeather();
